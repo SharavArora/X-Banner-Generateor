@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Banner Studio Pro - Ultimate Banner Creator</title>
+    <meta name="description" content="Create professional X (Twitter) banners with advanced effects, VIP features, and unlimited customization.">
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✨%3C/text%3E%3C/svg%3E">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4092618626350848" crossorigin="anonymous"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%); min-height: 100vh; color: white; }
+        .top-ad-banner { background: rgba(15, 23, 42, 0.95); padding: 0.5rem 0; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+        .top-ad-container { max-width: 1200px; margin: 0 auto; padding: 0.5rem 1rem; }
+        .ad-close-btn { position: absolute; top: 5px; right: 10px; background: rgba(255,255,255,0.1); border: none; color: white; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 14px; line-height: 1; }
+        .ad-close-btn:hover { background: rgba(255,255,255,0.2); }
+        .container { max-width: 1280px; margin: 0 auto; padding: 2rem 1rem; }
+        .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+        .logo { display: flex; align-items: center; gap: 1rem; }
+        .icon-box { width: 60px; height: 60px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; animation: glow 2s infinite; }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); } 50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); } }
+        h1 { font-size: 2rem; font-weight: 900; }
+        .subtitle { font-size: 0.875rem; color: #93c5fd; }
+        .btn { padding: 0.5rem 1rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-primary { background: linear-gradient(135deg, #a855f7, #ec4899); color: white; }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-dark { background: #1e293b; color: white; }
+        .grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+        @media (min-width: 1024px) { .grid { grid-template-columns: 2fr 1fr; } }
+        .card { background: #0f172a; border: 2px solid #1e293b; border-radius: 16px; padding: 1.5rem; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); }
+        .canvas-container { background: black; border-radius: 8px; margin-bottom: 1rem; }
+        canvas { width: 100%; height: auto; display: block; }
+        .controls { display: flex; flex-direction: column; gap: 1rem; }
+        .control-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        label { font-size: 0.75rem; font-weight: 700; }
+        input[type="text"], input[type="range"], select { width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid #334155; background: #1e293b; color: white; outline: none; }
+        input[type="text"]:focus, select:focus { border-color: #3b82f6; }
+        input[type="color"] { width: 100%; height: 40px; border-radius: 6px; cursor: pointer; border: none; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
+        .vip-section { border-top: 2px solid #334155; padding-top: 1rem; margin-top: 1rem; }
+        .vip-badge { background: linear-gradient(135deg, #d8b4fe, #a855f7); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700; }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .modal { background: #0f172a; border: 2px solid #a855f7; border-radius: 16px; padding: 2rem; width: 90%; max-width: 400px; }
+        .modal h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .modal input { margin-bottom: 1rem; }
+        .modal-buttons { display: flex; gap: 0.75rem; }
+        .error { color: #ef4444; font-size: 0.875rem; margin-bottom: 0.5rem; }
+        .info { background: #1e293b; padding: 0.75rem; border-radius: 8px; font-size: 0.75rem; color: #93c5fd; margin-bottom: 1rem; }
+        .ad-container { margin: 3rem auto; padding: 1rem; text-align: center; background: rgba(0,0,0,0.3); border-radius: 8px; max-width: 1200px; }
+        .ad-label { font-size: 10px; color: #666; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        footer { text-align: center; padding: 2rem; color: #888; font-size: 14px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Top Ad Banner - Prime Revenue Position -->
+    <div id="topAdBanner" class="top-ad-banner">
+        <div class="top-ad-container" style="position: relative;">
+            <div class="ad-label" style="margin-bottom: 8px;">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4092618626350848"
+                 data-ad-slot="3748575605"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            <button class="ad-close-btn" onclick="closeTopAd()" title="Close ad">&times;</button>
+        </div>
+    </div>
+
+    <!-- Header Ad Strip - Horizontal Banner -->
+    <div class="ad-container" style="margin-top: 1rem; margin-bottom: 0;">
+        <div class="ad-label">Advertisement</div>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4092618626350848"
+             data-ad-slot="8809330597"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="icon-box">✨</div>
+                <div>
+                    <h1>X Banner Studio Pro</h1>
+                    <p class="subtitle">Ultimate Banner Creator</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-primary" onclick="showVIPModal()">👑 Unlock VIP</button>
+                <button class="btn btn-dark">☀️</button>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="canvas-container">
+                    <canvas id="bannerCanvas"></canvas>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; padding: 1rem;" onclick="downloadBanner()">📥 Download Banner</button>
+            </div>
+
+            <div class="card" style="max-height: 600px; overflow-y: auto;">
+                <h3 style="margin-bottom: 1rem;">Controls</h3>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Main Text</label>
+                        <input type="text" id="mainText" value="Your Awesome Brand" maxlength="40" oninput="updateCanvas()">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Subtitle</label>
+                        <input type="text" id="subtitle" value="Build something incredible" maxlength="50" oninput="updateCanvas()">
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="control-group">
+                            <label>Font Size: <span id="fontSizeValue">48</span>px</label>
+                            <input type="range" id="fontSize" min="24" max="80" value="48" oninput="updateCanvas()">
+                        </div>
+                        <div class="control-group">
+                            <label>Subtitle: <span id="subtitleSizeValue">24</span>px</label>
+                            <input type="range" id="subtitleSize" min="12" max="48" value="24" oninput="updateCanvas()">
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="control-group">
+                            <label>Background</label>
+                            <input type="color" id="bgColor" value="#0f0f0f" oninput="updateCanvas()">
+                        </div>
+                        <div class="control-group">
+                            <label>Accent</label>
+                            <input type="color" id="accentColor" value="#1d9bf0" oninput="updateCanvas()">
+                        </div>
+                        <div class="control-group">
+                            <label>Text</label>
+                            <input type="color" id="textColor" value="#ffffff" oninput="updateCanvas()">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Gradient</label>
+                        <select id="gradient" onchange="updateCanvas()">
+                            <option value="linear">Linear</option>
+                            <option value="radial">Radial</option>
+                            <option value="solid">Solid</option>
+                        </select>
+                    </div>
+
+                    <div id="vipFeatures" class="vip-section hidden">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                            <h3 style="font-size: 0.875rem;">VIP Features</h3>
+                            <span class="vip-badge" id="vipBadge">FREE</span>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label>Font</label>
+                            <select id="customFont" onchange="updateCanvas()">
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Courier">Courier</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <label>Shadow: <span id="shadowValue">20</span>px</label>
+                            <input type="range" id="textShadow" min="0" max="50" value="20" oninput="updateCanvas()">
+                        </div>
+
+                        <div class="control-group">
+                            <label>Pattern</label>
+                            <select id="pattern" onchange="updateCanvas()">
+                                <option value="none">None</option>
+                                <option value="dots">Dots</option>
+                                <option value="lines">Lines</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="vipModal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Unlock Premium</h2>
+            <input type="text" id="vipCodeInput" placeholder="Enter VIP code...">
+            <p id="vipError" class="error hidden"></p>
+            <div class="info">Try: <strong>Bonusia</strong>, <strong>TrenVibe</strong>, <strong>codesXEROTIC</strong></div>
+            <div class="modal-buttons">
+                <button class="btn btn-dark" style="flex: 1;" onclick="hideVIPModal()">Cancel</button>
+                <button class="btn btn-primary" style="flex: 1;" onclick="validateVIPCode()">Verify</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="ad-container">
+        <div class="ad-label">Advertisement</div>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4092618626350848"
+             data-ad-slot="3748575605"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 X Banner Studio Pro. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">Create stunning banners with professional tools and VIP features.</p>
+    </footer>
+
+    <div class="ad-container">
+        <div class="ad-label">Advertisement</div>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-format="fluid"
+             data-ad-layout-key="-fb+5w+4e-db+86"
+             data-ad-client="ca-pub-4092618626350848"
+             data-ad-slot="8809330597"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <script>
+        var VIP_CODES = {
+            bonusia: 'VIP',
+            trendvibe: 'VIP',
+            codesxerotic: 'EVIP',
+            bonusiavip2024: 'EVIP',
+            eliteowner2024: 'ELITE',
+            bonusiaelite: 'ELITE'
+        };
+
+        var vipLevel = 'FREE';
+
+        function updateCanvas() {
+            var canvas = document.getElementById('bannerCanvas');
+            var ctx = canvas.getContext('2d');
+            var width = 1500;
+            var height = 500;
+
+            canvas.width = width;
+            canvas.height = height;
+
+            var mainText = document.getElementById('mainText').value;
+            var subtitle = document.getElementById('subtitle').value;
+            var bgColor = document.getElementById('bgColor').value;
+            var accentColor = document.getElementById('accentColor').value;
+            var textColor = document.getElementById('textColor').value;
+            var fontSize = document.getElementById('fontSize').value;
+            var subtitleSize = document.getElementById('subtitleSize').value;
+            var gradient = document.getElementById('gradient').value;
+            var customFont = document.getElementById('customFont') ? document.getElementById('customFont').value : 'Arial';
+            var textShadow = document.getElementById('textShadow') ? document.getElementById('textShadow').value : 20;
+            var pattern = document.getElementById('pattern') ? document.getElementById('pattern').value : 'none';
+
+            document.getElementById('fontSizeValue').textContent = fontSize;
+            document.getElementById('subtitleSizeValue').textContent = subtitleSize;
+            if (document.getElementById('shadowValue')) {
+                document.getElementById('shadowValue').textContent = textShadow;
+            }
+
+            if (gradient === 'linear') {
+                var grad = ctx.createLinearGradient(0, 0, width, height);
+                grad.addColorStop(0, bgColor);
+                grad.addColorStop(1, accentColor);
+                ctx.fillStyle = grad;
+            } else if (gradient === 'radial') {
+                var grad = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width);
+                grad.addColorStop(0, accentColor);
+                grad.addColorStop(1, bgColor);
+                ctx.fillStyle = grad;
+            } else {
+                ctx.fillStyle = bgColor;
+            }
+            ctx.fillRect(0, 0, width, height);
+
+            if (vipLevel !== 'FREE' && pattern !== 'none') {
+                ctx.fillStyle = accentColor;
+                ctx.globalAlpha = 0.08;
+                if (pattern === 'dots') {
+                    for (var i = 0; i < width; i += 30) {
+                        for (var j = 0; j < height; j += 30) {
+                            ctx.beginPath();
+                            ctx.arc(i, j, 3, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                } else if (pattern === 'lines') {
+                    ctx.strokeStyle = accentColor;
+                    ctx.lineWidth = 1;
+                    for (var i = 0; i < width; i += 20) {
+                        ctx.beginPath();
+                        ctx.moveTo(i, 0);
+                        ctx.lineTo(i, height);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            ctx.globalAlpha = 1;
+
+            ctx.fillStyle = accentColor;
+            ctx.globalAlpha = 0.15;
+            ctx.beginPath();
+            ctx.arc(width * 0.15, height * 0.3, 200, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(width * 0.85, height * 0.7, 150, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+
+            ctx.font = 'bold ' + fontSize + 'px ' + customFont;
+            ctx.fillStyle = textColor;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = accentColor;
+            ctx.shadowBlur = vipLevel !== 'FREE' ? textShadow : 20;
+            ctx.fillText(mainText, width/2, height/2 - 40);
+
+            ctx.font = subtitleSize + 'px ' + customFont;
+            ctx.fillStyle = accentColor;
+            ctx.fillText(subtitle, width/2, height/2 + 60);
+
+            if (vipLevel !== 'FREE') {
+                ctx.globalAlpha = 0.9;
+                ctx.fillStyle = vipLevel === 'ELITE' ? '#FFD700' : '#B19CD9';
+                ctx.font = 'bold 28px Arial';
+                ctx.textAlign = 'right';
+                var badge = vipLevel === 'ELITE' ? '👑 ELITE' : vipLevel === 'EVIP' ? '⭐ EVIP' : '✨ VIP';
+                ctx.fillText(badge, width - 40, 50);
+            }
+        }
+
+        function downloadBanner() {
+            var canvas = document.getElementById('bannerCanvas');
+            canvas.toBlob(function(blob) {
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = 'x-banner-' + Date.now() + '.png';
+                a.click();
+                URL.revokeObjectURL(url);
+            }, 'image/png');
+        }
+
+        function showVIPModal() {
+            document.getElementById('vipModal').classList.remove('hidden');
+        }
+
+        function hideVIPModal() {
+            document.getElementById('vipModal').classList.add('hidden');
+            document.getElementById('vipCodeInput').value = '';
+            document.getElementById('vipError').classList.add('hidden');
+        }
+
+        function validateVIPCode() {
+            var code = document.getElementById('vipCodeInput').value.trim().toLowerCase();
+            if (VIP_CODES[code]) {
+                vipLevel = VIP_CODES[code];
+                document.getElementById('vipFeatures').classList.remove('hidden');
+                document.getElementById('vipBadge').textContent = vipLevel;
+                hideVIPModal();
+                alert('✨ Welcome ' + vipLevel + ' Member!');
+                updateCanvas();
+            } else {
+                document.getElementById('vipError').textContent = 'Invalid code';
+                document.getElementById('vipError').classList.remove('hidden');
+            }
+        }
+
+        updateCanvas();
+    </script>
+
+    <script>
+        function closeTopAd() {
+            document.getElementById('topAdBanner').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
